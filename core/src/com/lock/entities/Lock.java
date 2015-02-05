@@ -5,23 +5,26 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 public class Lock {
+	Vector2 pos = new Vector2();
 	List<Tumbler> tumblerList = new ArrayList<Tumbler>();
 	int[] order; 
 	
-	public Lock(int size) {
+	public Lock(int size, Vector2 pos) {
+		this.pos = pos;
+		
 		fill(order, size);
+		
 		for (int i = 0; i < size; i++) {
-			tumblerList.add(new Tumbler());
+			tumblerList.add(new Tumbler(new Vector2(pos.x + (i * 50), pos.y)));
 		}
 	}
 	
-	public void draw(ShapeRenderer sr, int x, int y) {
-		int i = 0;
+	public void draw(ShapeRenderer sr) {
 		for (Tumbler tumbler : tumblerList) {
-			tumbler.draw(sr, i, x, y);
-			i++;
+			tumbler.draw(sr);
 		}
 	}
 	

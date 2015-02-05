@@ -3,9 +3,7 @@ package com.lock.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.lock.entities.Lock;
 import com.lock.game.Game;
@@ -26,7 +24,7 @@ public class PlayScreen implements Screen {
 
 		currentSelection = 0;
 		
-		lock = new Lock(size);
+		lock = new Lock(size, new Vector2((Game.WIDTH / 2), (Game.HEIGHT / 2)));
 	}
 	
 	public void show() {}
@@ -38,21 +36,7 @@ public class PlayScreen implements Screen {
 	}
 	
 	void draw() {
-		int x = Game.WIDTH / 2;
-		int y = Game.HEIGHT / 2;
-		
-		
-		Vector2[] target = new Vector2[3];
-		target[0] = new Vector2(x + 5 + (currentSelection * 25) , y - 50);
-		target[1] = new Vector2(x - 5 + (currentSelection * 25) , y - 50);
-		target[2] = new Vector2(x     + (currentSelection * 25) , y - 20);
-		
-		sr.setColor(Color.GREEN);
-		sr.begin(ShapeType.Filled);
-		sr.triangle(target[0].x, target[0].y, target[1].x, target[1].y, target[2].x, target[2].y);
-		sr.end();
-		
-		lock.draw(sr, x, y);
+		lock.draw(sr);
 	}
 	
 	void handleInput() {
