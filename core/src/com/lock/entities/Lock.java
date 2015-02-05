@@ -3,29 +3,53 @@ package com.lock.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 
 public class Lock {
-	Vector2 pos = new Vector2();
+	Vector2 pos;
 	List<Tumbler> tumblerList = new ArrayList<Tumbler>();
-	int[] order; 
+	int[] order;
+	float[] pickShape;
 	
 	public Lock(int size, Vector2 pos) {
-		this.pos = pos;
+		this.pos = pos.cpy();
 		
 		fill(order, size);
 		
 		for (int i = 0; i < size; i++) {
-			tumblerList.add(new Tumbler(new Vector2(pos.x + (i * 50), pos.y)));
+			tumblerList.add(new Tumbler(new Vector2(pos.x + (i * 25), pos.y)));
 		}
+		
+		setShape();
+	}
+	
+	void setShape() {
+		pickShape = new float[] {10, 0, -10, 0, 0, 20};
 	}
 	
 	public void draw(ShapeRenderer sr) {
 		for (Tumbler tumbler : tumblerList) {
 			tumbler.draw(sr);
 		}
+		
+		drawPick(sr);
+	}
+	
+	void drawPick(ShapeRenderer sr) {
+		Polygon pick = new Polygon(pickShape);
+		
+		pick.setPosition(pos.x, pos.y);
+		System.out.println("x: " + pos.x + " y: " + pos.y);
+		
+		sr.setColor(Color.WHITE);
+		sr.begin(ShapeType.Line);
+		sr.polygon(pickShape);
+		sr.end();
 	}
 	
 	int currentPicked() {

@@ -15,7 +15,7 @@ public class PlayScreen implements Screen {
 	
 	Lock lock;
 	int size = 5;
-	int currentSelection = 0;
+	public int currentSelection = 0;
 	
 	public PlayScreen(ScreenManager sm) {
 		this.sm = sm;

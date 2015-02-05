@@ -11,7 +11,7 @@ public class Tumbler {
 	boolean picked = false;
 	
 	public Tumbler(Vector2 pos) {
-		this.pos = pos;
+		this.pos = pos.cpy();
 		kp = new KeyPin(pos);
 		dp = new DriverPin(new Vector2(pos.x, pos.y + kp.getHeight()));
 	}

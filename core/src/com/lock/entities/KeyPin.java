@@ -12,7 +12,7 @@ public class KeyPin {
 	float[] shape;
 	
 	public KeyPin(Vector2 pos) {
-		this.pos = pos;
+		this.pos = pos.cpy();
 		height = 10;
 		//additional height;
 		height += MathUtils.random(1,10);

@@ -11,7 +11,7 @@ public class DriverPin {
 	int height;
 	float[] shape;
 	public DriverPin(Vector2 pos) {
-		this.pos = pos;
+		this.pos = pos.cpy();
 		height = 20;
 
 		setShape();
@@ -28,7 +28,7 @@ public class DriverPin {
 	public void draw(ShapeRenderer sr) {
 		Polygon dripoly = new Polygon(shape);
 		
-		dripoly.setPosition(pos.x,pos.y);
+		dripoly.setPosition(pos.x,pos.y + height);
 		
 		sr.begin(ShapeType.Line);
 		sr.polygon(dripoly.getTransformedVertices());
